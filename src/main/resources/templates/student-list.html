@@ -28,7 +28,8 @@
         <td th:text="${st.getAge()}"></td>
         <td th:text="${st.isSuspended()}"></td>
         <td>
-
+            <!--/student/edit?studentId=1-->
+            <a th:href="@{/student/edit(studentId=${st.getId()})}">Edit</a>
         </td><!--edit-->
         <td>
 
