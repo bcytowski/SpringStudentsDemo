@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragments</title>
+</head>
+<body>
+
+<th:block th:fragment="navigator">
+    <navigator>
+        <ul>
+            <li>
+                <a th:href="@{/}">Index</a>
+            </li>
+            <li>
+                <a th:href="@{/student/add}">Student add</a>
+            </li>
+            <li>
+                <a th:href="@{/student/list}">Student list</a>
+            </li>
+        </ul>
+    </navigator>
+</th:block>
+
+</body>
+</html>

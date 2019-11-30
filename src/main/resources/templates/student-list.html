@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student list</title>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator"/>
+<h1>Student list</h1>
+<table style="border: 1px solid #000; width: 100%">
+    <tr>
+        <th>Lp.</th>
+        <th>Id</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Index</th>
+        <th>Age</th>
+        <th>Suspended</th>
+        <th></th><!--edit-->
+        <th></th><!--remove-->
+    </tr>
+    <tr th:each="st,loop : ${students}">
+        <td th:text="${loop.index}"></td>
+        <td th:text="${st.getId()}"></td>
+        <td th:text="${st.getFirstName()}"></td>
+        <td th:text="${st.getLastName()}"></td>
+        <td th:text="${st.getIndexNumber()}"></td>
+        <td th:text="${st.getAge()}"></td>
+        <td th:text="${st.isSuspended()}"></td>
+        <td>
+
+        </td><!--edit-->
+        <td>
+
+        </td><!--remove-->
+    </tr>
+</table>
+</body>
+</html>

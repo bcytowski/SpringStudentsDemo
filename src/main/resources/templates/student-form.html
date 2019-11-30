@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student form</title>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator"/>
+    <h1>Student form</h1>
+<form action="/student/add" method="post" th:object="${student}">
+    <input type="hidden" th:field="*{id}"/>
+    First name: <input type="text" th:field="*{firstName}"/><br/>
+    Last name: <input type="text" th:field="*{lastName}"/><br/>
+    Index : <input type="text" th:field="*{indexNumber}"/><br/>
+    Age: <input type="number" th:field="*{age}" /><br/>
+    Suspended: <input type="checkbox" th:field="*{suspended}" /><br/><br/>
+
+    <input type="submit">
+</form>
+</body>
+</html>
