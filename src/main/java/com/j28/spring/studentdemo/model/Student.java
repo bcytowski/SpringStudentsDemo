@@ -33,7 +33,7 @@ public class Student  {
 
     // to samo dzieje się z metodą tostring
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
-    private List<Grade> grades;
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<Grade> grades;
 
 }

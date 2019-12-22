@@ -27,7 +27,9 @@ public class Grade {
     private LocalDateTime dateAdded;
 
     @ToString.Exclude
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "student_id", nullable = true)
+
     private Student student;
 
     public Grade(double value, GradeSubject subject) {
