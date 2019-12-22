@@ -37,6 +37,8 @@ public class GradeController {
         Optional<Student> student = studentService.find(studentId);
 
         student.map(s -> {
+            grade.setStudent(s);
+            gradeService.save(grade);
             s.getGrades().add(grade);
             studentService.save(s);
 
