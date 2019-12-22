@@ -4,17 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
 @Data // getter setter, tostring hashcode equals
 @AllArgsConstructor
 @NoArgsConstructor
-public class Student  {
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // identyfikator jest generowany przez bazę
@@ -33,6 +38,7 @@ public class Student  {
 
     // to samo dzieje się z metodą tostring
     @EqualsAndHashCode.Exclude
+    @Cascade(value = {CascadeType.PERSIST, CascadeType.MERGE})
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Grade> grades;
 
