@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+</html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="screen"/>
+
+</head>
+<body>
+<th:block th:replace="navigation-bar :: navigator"/>
+
+<h1>Grade list</h1>
+<table style="border: 1px solid #000; width: 100%">
+    <tr>
+        <table style="border: 1px solid #000; width: 100%">
+            <tr>
+                <th>Lp.</th>
+                <th>Id</th>
+                <th>Value</th>
+                <th>Subject</th>
+                <th>Date added</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </tr>
+
+            <tr th:each="gr,loop : ${grades}">
+                <td th:text="${loop.index}"></td>
+                <td th:text="${gr.getId()}"></td>
+                <td th:text="${gr.getSubject()}"></td>
+                <td th:text="${gr.getValue()}"></td>
+                <td th:text="${gr.getDateAdded()}"></td>
+                <!--        <td>-->
+                <!--            &lt;!&ndash;/student/edit?studentId=1&ndash;&gt;-->
+                <!--            <a th:href="@{/student/edit(studentId=${st.getId()})}">Edit</a>-->
+                <!--        </td>&lt;!&ndash;edit&ndash;&gt;-->
+                <!--        <td>-->
+                <!--            <a th:href="@{/student/remove(studentId=${st.getId()})}">Remove</a>-->
+                <!--        </td>&lt;!&ndash;remove&ndash;&gt;-->
+            </tr>
+        </table>
+</table>
+
+</body>
+</html>

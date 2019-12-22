@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,6 +34,6 @@ public class Student  {
     // to samo dzieje się z metodą tostring
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
-    private Set<Grade> grades;
+    private List<Grade> grades;
 
 }

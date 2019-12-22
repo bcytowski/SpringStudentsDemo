@@ -24,4 +24,13 @@ public class StudentService {
     public Optional<Student> find(Long id) {
         return studentRepository.findById(id);
     }
+
+    public void delete(Long id){
+        Optional <Student> optionalStudent = find(id);
+        if(optionalStudent.isPresent()){
+            studentRepository.delete(optionalStudent.get());
+        }else {
+            System.err.println("Couldn't find specific student");
+        }
+    }
 }

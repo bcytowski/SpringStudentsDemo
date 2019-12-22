@@ -1,11 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+</html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Student list</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+
+    <!-- include css in the header -->
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="screen"/>
+
+
 </head>
 <body>
-<th:block th:replace="fragments :: navigator"/>
+<th:block th:replace="navigation-bar :: navigator"/>
+
 <h1>Student list</h1>
 <table style="border: 1px solid #000; width: 100%">
     <tr>
@@ -28,12 +40,17 @@
         <td th:text="${st.getAge()}"></td>
         <td th:text="${st.isSuspended()}"></td>
         <td>
-            <!--/student/edit?studentId=1-->
             <a th:href="@{/student/edit(studentId=${st.getId()})}">Edit</a>
-        </td><!--edit-->
+        </td>
         <td>
-
-        </td><!--remove-->
+            <a th:href="@{/student/remove(studentId=${st.getId()})}">Remove</a>
+        </td>
+        <td>
+            <a th:href="@{/grade/add(studentId=${st.getId()})}">Add grade</a>
+        </td>
+        <td>
+            <a th:href="@{/grade/list(studentId=${st.getId()})}">Grades list</a>
+        </td>
     </tr>
 </table>
 </body>
