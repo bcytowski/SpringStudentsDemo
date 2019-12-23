@@ -19,28 +19,27 @@ import java.util.Set;
 public class GradeService  {
     @Autowired
     private final GradeRepository gradeRepository;
-    private final StudentRepository studentRepository;
+
 
 
     public void save(Grade grade){
         gradeRepository.save(grade);
     }
 
-
-
-    public Grade createGrade(Long studentId, Grade grade){
-        Set<Grade> grades = new HashSet<>();
-
-        Optional<Student>byId = studentRepository.findById(studentId);
-        Student student1 = byId.get();
-        grade.setStudent(student1);
-        Grade grade1 = gradeRepository.save(grade);
-        grades.add(grade1);
-        student1.setGrades(grades);
-        return grade1;
-    }
-
     public List<Grade> getAllByStudentId(Long studentId) {
         return gradeRepository.findByStudentId(studentId);
+    }
+
+    public void delete(Long gradeId){
+        Optional<Grade> gradeByIdOptional = findById(gradeId);
+        if(gradeByIdOptional.isPresent()){
+            gradeRepository.delete(gradeByIdOptional.get());
+        }
+        else System.err.println("couldn't find specific grade");
+    }
+
+    public Optional<Grade> findById (Long gradeId) {
+        Optional<Grade> byId = gradeRepository.findById(gradeId);
+        return byId;
     }
 }

@@ -8,9 +8,7 @@ import com.j28.spring.studentdemo.service.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +41,7 @@ public class GradeController {
             studentService.save(s);
 
             return s;
+
         }).orElseThrow(() -> new IllegalAccessException("studentId parameter invalid"));
 
         return "redirect:/grade/list?studentId=" + studentId;
@@ -50,11 +49,36 @@ public class GradeController {
 
 
     @GetMapping("/grade/list")
-    public String listGrades(Model model, @RequestParam(name = "studentId") Long studentId) {
+    public String listGrades(Model model, @RequestParam(name = "studentId") Long studentId, Student student) {
 
         List<Grade> grades = gradeService.getAllByStudentId(studentId);
         model.addAttribute("grades", grades);
+        model.addAttribute("student", student);
         return "grade-list";
+    }
+
+    @GetMapping("/grade/remove")
+    public String removeGrade(@RequestParam(name = "gradeId") Long gradeId,
+                              @RequestParam(name = "studentId") Long studentId) {
+        gradeService.delete(gradeId);
+        return "redirect:/grade/list?studentId=" + studentId;
+    }
+
+    @GetMapping("/grade/edit")
+    public String editGrade(@RequestParam(name = "gradeId") Long gradeId,
+            @RequestParam(name = "studentId") Long studentId, Model model) {
+        Optional<Grade> byGradeId = gradeService.findById(gradeId);
+        if(byGradeId.isPresent()){
+            Grade grade = byGradeId.get();
+
+            model.addAttribute("grade", grade);
+            model.addAttribute("subjects", GradeSubject.values());
+            model.addAttribute("studentId", studentId);
+            model.addAttribute("gradeId", gradeId);
+
+            return "grade-form";
+        }
+        return "redirect:/grade/list?studentId=" + studentId;
     }
 
 }
