@@ -15,7 +15,7 @@
 <body>
 <th:block th:replace="navigation-bar :: navigator"/>
 
-<h1>Grade list</h1>
+<h1>Grades</h1>
 <table style="border: 1px solid #000; width: 100%">
     <tr>
         <table style="border: 1px solid #000; width: 100%">
@@ -36,13 +36,14 @@
                 <td th:text="${gr.getSubject()}"></td>
                 <td th:text="${gr.getValue()}"></td>
                 <td th:text="${gr.getDateAdded()}"></td>
-                <!--        <td>-->
-                <!--            &lt;!&ndash;/student/edit?studentId=1&ndash;&gt;-->
-                <!--            <a th:href="@{/student/edit(studentId=${st.getId()})}">Edit</a>-->
-                <!--        </td>&lt;!&ndash;edit&ndash;&gt;-->
-                <!--        <td>-->
-                <!--            <a th:href="@{/student/remove(studentId=${st.getId()})}">Remove</a>-->
-                <!--        </td>&lt;!&ndash;remove&ndash;&gt;-->
+
+                <td>
+                    <a th:href="@{/grade/remove(gradeId=${gr.getId()}, studentId=${gr.getStudent().getId()})}">Remove</a>
+                </td>
+                <td>
+                    <a th:href="@{/grade/edit(gradeId=${gr.getId()}, studentId=${gr.getStudent().getId()})}">Edit</a>
+                </td>
+
             </tr>
         </table>
         </table>

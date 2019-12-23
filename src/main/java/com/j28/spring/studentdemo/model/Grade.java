@@ -1,9 +1,6 @@
 package com.j28.spring.studentdemo.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -27,8 +24,9 @@ public class Grade {
     private LocalDateTime dateAdded;
 
     @ToString.Exclude
-    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name="student_id", nullable=false)
+    @EqualsAndHashCode.Exclude
+    @ManyToOne (fetch = FetchType.LAZY)
+
 
     private Student student;
 

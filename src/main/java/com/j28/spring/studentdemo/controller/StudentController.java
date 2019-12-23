@@ -1,6 +1,8 @@
 package com.j28.spring.studentdemo.controller;
 
+import com.j28.spring.studentdemo.model.Grade;
 import com.j28.spring.studentdemo.model.Student;
+import com.j28.spring.studentdemo.service.GradeService;
 import com.j28.spring.studentdemo.service.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class StudentController {
 
     private final StudentService studentService;
+    private final GradeService gradeService;
 
     //    @RequestMapping(path = "/", method = RequestMethod.GET)
     @GetMapping("/")
@@ -49,7 +52,6 @@ public class StudentController {
         Optional<Student> studentOptional = studentService.find(id);
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-
             model.addAttribute("student", student);
             return "student-form";
         }
@@ -60,6 +62,9 @@ public class StudentController {
     public String deleteStudent(@RequestParam(name = "studentId") Long id){
         studentService.delete(id);
 
+
         return "redirect:/student/list";
     }
+
+
 }
